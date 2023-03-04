@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Add Product</title>
+    {% include 'nav.html' %}
+{% endblock %}
+
+{% block body %}
+    
+<br><br><br>
+    <form method="post">
+        Name <br>
+        <input type="text" name="product_name" required> <br><br>
+        price <br>
+        <input type="text" name="product_price" required> <br><br>
+        quantity <br>
+        <input type="text" name="product_quantity" required> <br><br>
+        dealer <br>
+        <input type="text" name="product_dealer" required> <br><br>
+        description <br>
+        <input type="text" name="product_description" required> <br><br>
+        <input type="submit" value="Add Product">
+    </form>
+{% endblock %}

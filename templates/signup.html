@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Signup</title>
+    <style>
+        .form
+  {
+    
+  margin: auto;
+  width: 25%;
+  border: 3px solid green;
+  padding: 10px;
+  text-align: center;
+}
+        
+    </style>
+{% endblock %}
+
+{% block body %}
+<div id="back_link">
+    <a href="/"><input type="button" value="<BACK"></a><br><br>
+</div>
+<div class="form">
+    <form method="post">
+        <input id="first_name" type="text" name="first_name" placeholder="First Name">
+        <br><br>
+        <input id="last_name" type="text" name="last_name" placeholder="Last Name">
+        <!-- <input id="gender" type="text" name="gender" placeholder="gender"> -->
+        <br><br>
+        <label>
+            <input type="radio" name="gender" value="male">
+            Male
+          </label>
+          <label>
+            <input type="radio" name="gender" value="female">
+            Female
+          </label>
+          <label>
+            <input type="radio" name="gender" value="other">
+            Other
+          </label>
+          <br><br><input id="phone" type="tel" name="phone" placeholder="Mobile Number">
+          <br><br><input id="email" type="email" name="email_address" placeholder="Email Address" required>
+          
+          <br><br><input id="password" type="password" name="password" placeholder="Password">
+          
+        {{msg}}
+        <br><br><input id="otp" type="number" name="otp" placeholder="Enter 6-digit OTP" maxlength="6" size="6" >
+        <br><br><input type="submit" value="Submit">
+
+    </form>
+    <br><br><button onclick="generate_otp_email()">Verify Email</button>
+    
+</div>
+
+
+
+<script>
+    function generate_otp_email(){
+        var email = $('#email').val();
+        $.ajax({
+                url: '/generate_otp_email',
+                data: {data:email},
+                type: 'POST',
+                success:function(response){
+                    var generated_otp = response.otp
+                    if (generated_otp === 1) {
+                    alert("Wrong Email");
+                    }
+                    // else if(){
+
+                    // }
+                    else{
+                        var popup = response.msg
+                        popup.classList.toggle("show");
+                    }
+                },
+                error: function(error){
+			 	    console.log(error);
+                    alert("The entered Email is Incorrect");
+			    }
+            });
+    }
+</script>
+
+
+
+{% endblock %}
+

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Dashboard</title>
+{% endblock %}
+
+{% block body %}
+    {% include 'nav.html' %}
+<br><br><br><br>
+
+<h2>Available Products</h2>
+    {% for i in product %}
+    <div >
+    {% if session['role'] == 'admin' %}
+    <br> <label>Id : </label>{{i.Product_Id}}
+    {% endif %}
+    <br> <label>Name : </label>{{i.Product_Name}} <br> 
+    <label>Price : </label>{{i.Product_Price}} <br> 
+    <label>Descripion : </label>{{i.Product_description}}
+    <br> <input id="{{i.Product_Id}}_count" type="number" name="count" value="1" required> 
+    <button onclick="add_to_cart('{{i.Product_Id}}')">Add to cart</button>
+    </div> <br> <hr>
+    {% endfor %}
+
+    <script>
+        function add_to_cart(id){
+            var product_id = id;
+            var count = $("#"+id+"_count").val();
+            $.ajax({
+                url : 'add_to_cart',
+                data : {
+                    id : product_id,
+                    count : count, 
+                },
+                type : 'POST',
+                success:function(response){
+                    console.log('Product Added');
+                },
+                error:function(error){
+                    console.log('The data is insufficiant');
+                }
+            })
+        }
+    </script>
+
+{% endblock %}
+
+
+

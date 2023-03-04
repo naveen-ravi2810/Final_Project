@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Login</title>
+{% endblock %}
+
+{% block body %}
+    {{msg}}
+    <div id="back_link">
+        <a href="/"><input type="button" value="<BACK"></a>
+    </div>
+    <div class="form">
+        <form method="post">
+            <input type="text" name="username" placeholder="Email Address / Mobile Number">
+            <input type="password" name="password" placeholder="Password">
+            <input type="submit" value="Login">
+        </form>
+    </div>
+    <div class="register">
+        <button><a href="{{url_for('signup')}}">Sign Up</a></button>
+        <button><a href="{{url_for('forgot_password')}}">Forgot Password</a></button>
+    </div>
+{% endblock %}

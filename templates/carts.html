@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Carts</title>{% include 'nav.html' %}
+{% endblock %}
+
+{% block body %}
+<br><br><br>
+<h1>
+    Hi {{session['name']}} This is your cart
+</h1><br>
+
+{% for i in products %}
+    {% set product_name = all_products[i['Product_Id']-1]['Product_Name'] %}
+    {% set product_price = all_products[i['Product_Id']-1]['Product_Price'] | int %}
+    {% set total_price = product_price*i.Product_Quantity %}
+    {{ product_name }} Rs.{{ product_price }}<br>
+    <label>Quantity : </label>{{ i.Product_Quantity }} <br>
+    <label>Total : </label>{{ total_price  }}<br><br>
+    <hr> <br>
+{% endfor %}
+
+
+{% endblock %}

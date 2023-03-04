@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+    <title>Upload Site</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+      *{
+        background: rgb(247, 245, 241);
+      }
+      .temp{
+        margin:0px 0px 0px 40px;
+        color:rgba(0,0,0,0.8);
+        font-family: 'Nunito',sans-serif;
+        font-size: 27px;
+      }
+      .file{
+        margin-top: 20px;
+        margin-left: 40px;
+        
+      }
+      .text{
+        margin-top: 20px;
+        margin-left:50px;
+      }
+      .upload{
+        
+        border-style: dashed;
+        margin-left:85px;
+      }
+    </style>
+    <h1 class="temp">Hey {{session['name']}} !!<br><hr>Upload your profile !</h1>
+
+{% endblock %}
+
+{% block body %} 
+
+{% include 'nav.html' %}
+
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="pic" placeholder="file"class="file" > 
+  <input type="submit" value="Upload"class="upload">
+</form>
+
+{% endblock %}
